@@ -8,7 +8,7 @@
     Title="Class2GUI"
     Width="1024"
     Height="800"
-    Background="#FFD2F3F8"
+    Background="#FFBEF0F7"
     Icon="ClassToWPF.ico"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

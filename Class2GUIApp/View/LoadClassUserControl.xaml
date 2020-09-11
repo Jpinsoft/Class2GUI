@@ -56,12 +56,13 @@
                     Background="#77DDDDDD"
                     BorderThickness="0"
                     Click="BtnLoadDll_Click"
-                    Content="{Binding InfoText}"
                     Cursor="Hand"
                     DockPanel.Dock="Bottom"
                     FontSize="24"
                     FontStyle="Italic"
-                    FontWeight="SemiBold" />
+                    FontWeight="SemiBold">
+                    <TextBlock Text="{Binding InfoText}" TextWrapping="Wrap" />
+                </Button>
             </DockPanel>
         </Border>
     </DockPanel>

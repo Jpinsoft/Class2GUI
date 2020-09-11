@@ -14,7 +14,7 @@ namespace Jpinsoft.Class2GUIApp.ViewModel
         {
         }
 
-        private string infoText = "Library is not Loaded. \nClick here for Load .NET DLL or Drag .NET DLL file to this Drop Zone.";
+        private string infoText = $"Library is not Loaded.{Environment.NewLine}Click here for Load .NET DLL or Drag .NET DLL file to this Drop Zone.";
 
         public string InfoText
         {

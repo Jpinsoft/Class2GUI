@@ -53,7 +53,8 @@
             Padding="5"
             FontStyle="Italic"
             IsEnabled="False"
-            Text="{Binding SelectedItem.Description, ElementName=CbGuiGenerators, Mode=OneWay}" />
+            Text="{Binding SelectedItem.Description, ElementName=CbGuiGenerators, Mode=OneWay}"
+            TextWrapping="Wrap" />
         <Label Grid.Row="3" Grid.Column="0">Output Directory:</Label>
 
         <TextBox
