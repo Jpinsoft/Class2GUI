@@ -23,5 +23,15 @@ namespace Jpinsoft.Class2GUITest.SampleTypes
         public DateTime BirthDate { get; set; }
 
         public bool IsAdult { get { return (DateTime.Now - BirthDate).TotalDays > (18 * 365); } }
+
+        /// <summary>
+        /// Generic type will be skipped
+        /// </summary>
+        public SampleGenericType<int> GenProp { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }

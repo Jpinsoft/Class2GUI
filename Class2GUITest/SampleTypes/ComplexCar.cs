@@ -13,5 +13,7 @@ namespace Jpinsoft.Class2GUITest.SampleTypes
         public string VIN { get; set; }
 
         public CarTypeEnum CarType { get; set; }
+
+        public List<ComplexUser> Drivers { get; set; }
     }
 }

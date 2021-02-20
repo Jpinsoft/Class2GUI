@@ -167,7 +167,8 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 
                         if (genericArgument != null)
                         {
-                            if (genericArgument.Assembly != targetType.Assembly)
+                            // Generic Types are not supported
+                            if (genericArgument.IsGenericType || genericArgument.Assembly != targetType.Assembly)
                                 break;
 
                             UnknownTypes.Add(genericArgument);
