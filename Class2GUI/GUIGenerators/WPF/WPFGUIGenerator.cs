@@ -60,6 +60,9 @@ namespace Jpinsoft.Class2GUI.WPF
 
         public void GenerateGUIFiles(Dictionary<string, StringBuilder> outputFiles, Type targetType, string outNamespace, byte maxRecursionLevel)
         {
+            if (targetType.IsGenericType)
+                throw new NotImplementedException("Generic Types are not supported.");
+
             List<Type> renderedTypes = new List<Type>();
 
             WPFClass2GUIBuilder wpfGen = new WPFClass2GUIBuilder();

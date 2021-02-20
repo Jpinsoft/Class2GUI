@@ -39,7 +39,8 @@ namespace Jpinsoft.Class2GUI
         {
             // Only types WITH some properties
             // Only types FROM loaded assembly
-            return classLibrary.GetTypes().Where(type => type.IsClass && type.GetProperties().Count() > 0 && (type.BaseType == typeof(object) || type.BaseType.Assembly == classLibrary))
+            // Only Non-Generic Types
+            return classLibrary.GetTypes().Where(type => type.IsClass && !type.IsGenericType && type.GetProperties().Count() > 0 && (type.BaseType == typeof(object) || type.BaseType.Assembly == classLibrary))
                 .Select(t => new GeneratedTypeInfo(t, classLibrary)).ToList();
         }
     }

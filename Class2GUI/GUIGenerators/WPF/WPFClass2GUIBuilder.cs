@@ -176,7 +176,8 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
                             break;
                         }
 
-                        if (propInfo.PropertyType.Assembly != targetType.Assembly)
+                        // Generic Types are not supported
+                        if (propInfo.PropertyType.IsGenericType || propInfo.PropertyType.Assembly != targetType.Assembly)
                             break;
 
                         UnknownTypes.Add(propInfo.PropertyType);
