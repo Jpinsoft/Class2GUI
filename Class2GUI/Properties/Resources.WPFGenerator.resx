@@ -391,7 +391,7 @@ namespace {0}
 
             // WPF GENERATOR - FAKE INSTANCE, REPLACE BY YOUR LOGIC
             //-------------------------------------------------------------------
-            this.DataContext = new Jpinsoft.RandomPocoGenerator.RPGenerator().Generate&lt;{2}ViewModel&gt;(3);
+            this.DataContext = new Jpinsoft.SomeObject.SOBuilder().Generate&lt;{2}ViewModel&gt;(3);
             //-------------------------------------------------------------------
         }}
 
