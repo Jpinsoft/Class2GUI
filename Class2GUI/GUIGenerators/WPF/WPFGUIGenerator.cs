@@ -13,7 +13,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Jpinsoft.Class2GUI.WPF
+namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 {
     public class WPFGUIGenerator : IGUIGenerator
     {

@@ -1,5 +1,4 @@
 ﻿using Jpinsoft.Class2GUI;
-using Jpinsoft.Class2GUI.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;

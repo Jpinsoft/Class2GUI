@@ -1,5 +1,5 @@
-﻿using Jpinsoft.Class2GUI.Types;
-using Jpinsoft.Class2GUI.WPF;
+﻿using Jpinsoft.Class2GUI.GUIGenerators.WPF;
+using Jpinsoft.Class2GUI.Types;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
