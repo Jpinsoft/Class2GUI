@@ -5,9 +5,11 @@ using System.Text;
 
 namespace Jpinsoft.Class2GUI.Types
 {
-    public interface IGUIGenerator
+    public interface IGUIGenerator : IDisposable
     {
         string Description { get; }
+
+        void Init(GeneratedAssemblyInfo TargetAssemblyInfo);
 
         void GenerateGUIFiles(Dictionary<string, StringBuilder> outputFiles, Type targetType, string outNamespace, byte maxRecursionLevel);
 

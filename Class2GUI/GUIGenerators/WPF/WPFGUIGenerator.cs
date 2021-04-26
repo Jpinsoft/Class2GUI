@@ -32,12 +32,22 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 
         public string Description { get { return "WPFGUIGenerator is a straightforward UI generator. This tool generate a WPF project (with use MVVM) from .NET library."; } }
 
+        public GeneratedAssemblyInfo TargetAssemblyInfo { get; private set; }
+
         #endregion
 
         #region IGUIGenerator
 
+        public void Init(GeneratedAssemblyInfo targetAssemblyInfo)
+        {
+            TargetAssemblyInfo = targetAssemblyInfo;
+        }
+
         public void GenerateGUIProject(string outFolder, List<Type> targetTypes, string outNamespace, byte maxRecursionLevel)
         {
+            if (TargetAssemblyInfo == null)
+                throw new InvalidOperationException($"{nameof(WPFGUIGenerator)} is not initialized. Call Init for initialize GeneratedAssemblyInfo");
+
             StringBuilder csProjItemsGroup = new StringBuilder();
 
             this.outNamespace = outNamespace;
@@ -46,12 +56,12 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
             List<Type> renderedTypes = new List<Type>();
             Dictionary<string, StringBuilder> res = new Dictionary<string, StringBuilder>();
 
-            foreach (Type tarType in targetTypes)
+            foreach (Type tarType in TargetTypes)
             {
                 this.GenerateGUIFiles(res, tarType, outNamespace, maxRecursionLevel);
             }
 
-            UnpackProj(targetTypes, outFolder, outNamespace);
+            UnpackProj(TargetTypes, outFolder, outNamespace);
 
             this.RenderFiles(res, Path.Combine(outFolder, CN_PROJ_TEMPLATE), csProjItemsGroup);
 
@@ -165,11 +175,9 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 
         private void AddItemsToProj(StringBuilder csProjItemsGroup, string outFolder)
         {
-            Assembly assmebly = this.TargetTypes.First().Assembly;
-
             string projFolderPath = Path.Combine(outFolder, CN_PROJ_TEMPLATE);
 
-            File.Copy(assmebly.Location, Path.Combine(projFolderPath, Path.GetFileName(assmebly.Location)));
+            File.WriteAllBytes(Path.Combine(projFolderPath, TargetAssemblyInfo.AssemblyFileName), TargetAssemblyInfo.AssemblyRawData);
 
             string projFilePath = Path.Combine(projFolderPath, $"{CN_PROJ_TEMPLATE}.csproj");
             string newProjFilePath = Path.Combine(projFolderPath, this.outNamespace + ".csproj");
@@ -177,7 +185,7 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 
             File.Delete(projFilePath);
 
-            File.WriteAllText(newProjFilePath, string.Format(projFile, "{" + Guid.NewGuid() + "}", assmebly.GetName(), Path.GetFileName(assmebly.Location), csProjItemsGroup, this.outNamespace));
+            File.WriteAllText(newProjFilePath, string.Format(projFile, "{" + Guid.NewGuid() + "}", TargetAssemblyInfo.TargetAssembly.GetName(), TargetAssemblyInfo.AssemblyFileName, csProjItemsGroup, this.outNamespace));
 
             // UPDATE SLN
             string slnFilePath = Path.Combine(outFolder, $"{CN_PROJ_TEMPLATE}Sln.sln");
@@ -190,6 +198,17 @@ namespace Jpinsoft.Class2GUI.GUIGenerators.WPF
 
             if (!Directory.Exists(newProjFolder))
                 Directory.Move(projFolderPath, newProjFolder);
+        }
+
+        public void Dispose()
+        {
+            if (TargetAssemblyInfo != null)
+            {
+                TargetAssemblyInfo.AssemblyRawData = null;
+                TargetAssemblyInfo.AssemblyTypes = null;
+                TargetAssemblyInfo.TargetAssembly = null;
+                TargetAssemblyInfo = null;
+            }
         }
 
         #endregion

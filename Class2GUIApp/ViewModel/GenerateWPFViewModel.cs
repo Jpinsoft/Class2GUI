@@ -44,6 +44,7 @@ namespace Jpinsoft.Class2GUIApp.ViewModel
         {
             IEnumerable<IGrouping<Type, LibraryItemViewModel>> groupedPropsByType = LibraryItems.Where(item => item.PocoProperty != null && item.GenerateThis).GroupBy(item => item.PocoProperty.DeclaringType);
 
+            SelectedGenerator.Init(base.TargetAssemblyInfo);
             SelectedGenerator.GenerateGUIProject(OutputFolder, groupedPropsByType.Select(g => g.Key).ToList(), OutputNamespace, 4);
 
             Process.Start(OutputFolder);

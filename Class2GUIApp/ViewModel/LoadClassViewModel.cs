@@ -30,7 +30,8 @@ namespace Jpinsoft.Class2GUIApp.ViewModel
             if (string.IsNullOrEmpty(fileName) || !fileName.ToLower().EndsWith(".dll"))
                 return;
 
-            base.PocoTypes = ClassToGUITools.LoadPocoLibrary(fileName);
+            base.TargetAssemblyInfo = ClassToGUITools.LoadPocoLibrary(fileName);
+            base.PocoTypes = base.TargetAssemblyInfo.AssemblyTypes;
             base.LibraryItems.Clear();
 
             InfoText = $"Library '{fileName}' was succesfully loaded.";

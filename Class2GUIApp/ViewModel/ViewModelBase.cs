@@ -17,8 +17,15 @@ namespace Jpinsoft.Class2GUIApp.ViewModel
         private static List<GeneratedTypeInfo> pocoTypes = new List<GeneratedTypeInfo>();
         private static ObservableCollection<LibraryItemViewModel> libraryItems = new ObservableCollection<LibraryItemViewModel>();
         private static MainWindowViewModel mainViewModel;
+        private static GeneratedAssemblyInfo targetAssemblyInfo;
 
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public GeneratedAssemblyInfo TargetAssemblyInfo
+        {
+            get { return targetAssemblyInfo; }
+            set { targetAssemblyInfo = value; }
+        }
 
         public List<GeneratedTypeInfo> PocoTypes
         {

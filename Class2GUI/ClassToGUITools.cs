@@ -1,6 +1,7 @@
 ﻿using Jpinsoft.Class2GUI.Types;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -28,11 +29,15 @@ namespace Jpinsoft.Class2GUI
             return null;
         }
 
-        public static List<GeneratedTypeInfo> LoadPocoLibrary(string classLibPath)
+        public static GeneratedAssemblyInfo LoadPocoLibrary(string classLibPath)
         {
-            Assembly pocoLib = Assembly.LoadFrom(classLibPath);
+            GeneratedAssemblyInfo aInfo = new GeneratedAssemblyInfo();
 
-            return LoadPocoLibrary(pocoLib);
+            aInfo.AssemblyRawData = File.ReadAllBytes(classLibPath);
+            aInfo.TargetAssembly = Assembly.Load(aInfo.AssemblyRawData);
+            aInfo.AssemblyTypes = LoadPocoLibrary(aInfo.TargetAssembly);
+
+            return aInfo;
         }
 
         public static List<GeneratedTypeInfo> LoadPocoLibrary(Assembly classLibrary)
