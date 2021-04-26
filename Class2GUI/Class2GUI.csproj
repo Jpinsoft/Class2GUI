@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Jpinsoft.Class2GUI</RootNamespace>
+    <AssemblyVersion>1.0.2104.26</AssemblyVersion>
+    <FileVersion>1.0.2104.26</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
