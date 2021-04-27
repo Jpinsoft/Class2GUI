@@ -31,9 +31,14 @@ namespace Jpinsoft.Class2GUI
 
         public static GeneratedAssemblyInfo LoadPocoLibrary(string classLibPath)
         {
+            return LoadPocoLibrary(File.ReadAllBytes(classLibPath));
+        }
+
+        public static GeneratedAssemblyInfo LoadPocoLibrary(byte[] classLibData)
+        {
             GeneratedAssemblyInfo aInfo = new GeneratedAssemblyInfo();
 
-            aInfo.AssemblyRawData = File.ReadAllBytes(classLibPath);
+            aInfo.AssemblyRawData = classLibData;
             aInfo.TargetAssembly = Assembly.Load(aInfo.AssemblyRawData);
             aInfo.AssemblyTypes = LoadPocoLibrary(aInfo.TargetAssembly);
 
